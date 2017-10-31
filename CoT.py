@@ -46,13 +46,14 @@ class CursorOnTarget:
         unit_id = ID[unit["identity"]] or ID["none"]
     
         cot_type = "a-" + unit_id + "-" + DIM[unit["dimension"]]
-        if (len(unit["type"]) > 0):
-            cot_type = cot_type + "-" + unit["type"]
 
-        if (len(unit["uid"]) > 0):
-            cot_id = unit["uid"]
+        if "type" in unit:
+          cot_type = cot_type + "-" + unit["type"]
+
+        if "uid" in unit:
+          cot_id = unit["uid"]
         else:
-            cot_id = uuid.uuid4().get_hex()
+          cot_id = uuid.uuid4().get_hex()
 
         evt_attr = {
             "version": "2.0",
@@ -78,7 +79,8 @@ class CursorOnTarget:
         cot_xml = '<?xml version="1.0" standalone="yes"?>' + ET.tostring(cot)
         return cot_xml
 
-    def pushUDP(__self, ip_addr, port, cot_xml):
+    def pushUDP(__self, ip_address, port, cot_xml):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sent = sock.sendto(cot_xml, (ip_addr, port))
+        sent = sock.sendto(cot_xml, (ip_address, port))
         return sent
+

@@ -1,7 +1,12 @@
 import PushCoT
 
 ATAK_IP = "192.168.1.150"
+if "ATAK_IP" in os.environ:
+  ATAK_IP = os.environ["ATAK_IP"]
+
 ATAK_PORT = 4242
+if "ATAK_PORT" in os.environ:
+  ATAK_PORT = int(os.environ["ATAK_PORT"])
 
 params = {  # SWX parking lot
     "lat": 27.957261,
@@ -22,4 +27,4 @@ print cot_xml
 
 print "\nPushing to ATAK..."
 sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
-print str(sent) + " bytes sent to " + ATAK_IP + ":" + str(ATAK_PORT)
+print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
