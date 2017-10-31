@@ -12,11 +12,11 @@ if "ATAK_PORT" in os.environ:
 params = {  # SWX parking lot
     "lat": 27.957261,
     "lon": -82.436587,
-    "uid": "SWX",
-    "identity": "friend",
-    "dimension": "land-equipment",
+    "uid": "Nerd Herd",
+    "identity": "hostile",
+    "dimension": "land-unit",
     "entity": "military",
-#    "type": "E-V-A"
+    "type": "U-C-R-H"
 }
 
 print "Params:\n" + str(params)
