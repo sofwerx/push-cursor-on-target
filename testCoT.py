@@ -1,4 +1,5 @@
-import PushCoT
+import os
+import CoT
 
 ATAK_IP = "192.168.1.160"
 if "ATAK_IP" in os.environ:
