@@ -9,6 +9,7 @@ params = {  # SWX parking lot
     "type": "E-V-A-T"
 }
 
-cot_xml = PushCoT.push_atoms(params)
+cot = PushCoT.CursorOnTarget()
+cot_xml = cot.push(params)
 
 print cot_xml

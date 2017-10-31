@@ -27,32 +27,34 @@ DIM = {
     "other": "X"
 }
 
-def push_atoms(unit):
-    zulu = t.strftime("%Y-%m-%dT%H:%M:%SZ", t.gmtime())
-    unit_id = ID[unit["identity"]] or ID["none"]
-    
-    cot_type = "a-" + unit_id + "-" + DIM[unit["dimension"]] + "-" + unit["type"]
-    cot_id = uuid.uuid4().get_hex()
-    
-    evt_attr = {
-        "version": "2.0",
-        "uid": cot_id,
-        "time": zulu,
-        "start": zulu,
-        "stale": zulu,
-        "type": cot_type
-    }
+class CursorOnTarget:
 
-    pt_attr = {
-        "lat": str(unit["lat"]),
-        "lon":  str(unit["lon"]),
-        "hae": "1",   #unit["hae"],
-        "ce": "1",    #unit["ce"],
-        "le": "1"     #unit["le"]1
-    }
+    def push(unit):
+        zulu = t.strftime("%Y-%m-%dT%H:%M:%SZ", t.gmtime())
+        unit_id = ID[unit["identity"]] or ID["none"]
     
-    cot = ET.Element('event', attrib=evt_attr)
-    ET.SubElement(cot, 'detail')
-    ET.SubElement(cot,'point', attrib=pt_attr)
+        cot_type = "a-" + unit_id + "-" + DIM[unit["dimension"]] + "-" + unit["type"]
+        cot_id = uuid.uuid4().get_hex()
     
-    return ET.dump(cot)
+        evt_attr = {
+            "version": "2.0",
+            "uid": cot_id,
+            "time": zulu,
+            "start": zulu,
+            "stale": zulu,
+            "type": cot_type
+        }
+
+        pt_attr = {
+            "lat": str(unit["lat"]),
+            "lon":  str(unit["lon"]),
+            "hae": "1",   #unit["hae"],
+            "ce": "1",    #unit["ce"],
+            "le": "1"     #unit["le"]1
+        }
+    
+        cot = ET.Element('event', attrib=evt_attr)
+        ET.SubElement(cot, 'detail')
+        ET.SubElement(cot,'point', attrib=pt_attr)
+    
+        return ET.dump(cot)
