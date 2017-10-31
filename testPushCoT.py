@@ -20,4 +20,4 @@ print "\nXML message:"
 print cot_xml
 
 print "\nPushing to ATAK..."
-PushCoT.push_to_atak(ATAK_IP, ATAK_PORT, cot_xml)
+cot.push_to_atak(ATAK_IP, ATAK_PORT, cot_xml)
