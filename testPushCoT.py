@@ -12,9 +12,9 @@ params = {  # SWX parking lot
     "type": ""
 }
 
-print "Constructing XML with:"
 print params
-cot_xml = PushCoT.atoms_xml(params)
+cot = PushCoT.CursorOnTarget()
+cot_xml = cot.push(params)
 
 print "\nXML message:"
 print cot_xml
