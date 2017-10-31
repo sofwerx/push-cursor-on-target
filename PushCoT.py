@@ -1,4 +1,4 @@
-import time as t
+import datetime as dt
 import uuid
 import xml.etree.ElementTree as ET
 import socket
@@ -28,23 +28,35 @@ DIM = {
     "other": "X"
 }
 
+DATETIME_FMT = "%Y-%m-%dT%H:%M:%SZ"
+
 class CursorOnTarget:
 
-    def push(__self, unit):
-        zulu = t.strftime("%Y-%m-%dT%H:%M:%SZ", t.gmtime())
+    def atoms(__self, unit):
+        timer = dt.datetime
+        now = timer.utcnow()
+        zulu = now.strftime(DATETIME_FMT)
+
+        stale_now = now.replace(minute=now.minute + 1)
+        stale = stale_now.strftime(DATETIME_FMT)
+
         unit_id = ID[unit["identity"]] or ID["none"]
     
         cot_type = "a-" + unit_id + "-" + DIM[unit["dimension"]]
         if (len(unit["type"]) > 0):
             cot_type = cot_type + "-" + unit["type"]
-        cot_id = uuid.uuid4().get_hex()
-    
+
+        if (len(unit["uid"]) > 0):
+            cot_id = unit["uid"]
+        else:
+            cot_id = uuid.uuid4().get_hex()
+
         evt_attr = {
             "version": "2.0",
             "uid": cot_id,
             "time": zulu,
             "start": zulu,
-            "stale": zulu,
+            "stale": stale,
             "type": cot_type
         }
 
@@ -60,11 +72,10 @@ class CursorOnTarget:
         ET.SubElement(cot, 'detail')
         ET.SubElement(cot,'point', attrib=pt_attr)
     
-        cot_xml = "<?xml version='1.0' standalone='yes'?'>" + ET.tostring(cot)
+        cot_xml = '<?xml version="1.0" standalone="yes"?>' + ET.tostring(cot)
         return cot_xml
 
-    def push_to_atak(__self, ip_addr, port, cot_xml):
+    def pushUDP(__self, ip_addr, port, cot_xml):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sent = sock.sendto(cot_xml, (ip_addr, port))
-        print str(sent) + " bytes sent to " + ip_addr + ":" + str(port)
-        return
+        return sent
