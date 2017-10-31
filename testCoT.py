@@ -12,7 +12,7 @@ params = {  # SWX parking lot
     "type": ""
 }
 
-cot = PushCoT.CursorOnTarget()
+cot = CoT.CursorOnTarget()
 cot_xml = cot.push(params)
 
 print "\nXML message:"
