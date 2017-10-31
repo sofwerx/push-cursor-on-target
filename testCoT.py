@@ -1,12 +1,8 @@
+import os
 import PushCoT
 
-ATAK_IP = "192.168.1.150"
-if "ATAK_IP" in os.environ:
-  ATAK_IP = os.environ["ATAK_IP"]
-
-ATAK_PORT = 4242
-if "ATAK_PORT" in os.environ:
-  ATAK_PORT = int(os.environ["ATAK_PORT"])
+ATAK_IP = os.getenv('ATAK_IP', '192.168.1.150')
+ATAK_PORT = int(os.getenv('ATAK_PORT', '4242'))
 
 params = {  # SWX parking lot
     "lat": 27.957261,
