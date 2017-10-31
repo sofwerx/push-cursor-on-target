@@ -2,6 +2,9 @@ import time as t
 import uuid
 import xml.etree.ElementTree as ET
 import socket
+import logging
+
+logger = logging.getLogger("django")
 
 ID = {
     "pending": "p",
