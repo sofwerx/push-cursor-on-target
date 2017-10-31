@@ -1,7 +1,7 @@
 import os
-import PushCoT
+import CoT
 
-ATAK_IP = os.getenv('ATAK_IP', '192.168.1.150')
+ATAK_IP = os.getenv('ATAK_IP', '192.168.1.160')
 ATAK_PORT = int(os.getenv('ATAK_PORT', '4242'))
 
 params = {  # SWX parking lot
@@ -11,7 +11,7 @@ params = {  # SWX parking lot
     "identity": "friend",
     "dimension": "land-equipment",
     "entity": "military",
-    "type": ""
+#    "type": "E-V-A"
 }
 
 print "Params:\n" + str(params)
