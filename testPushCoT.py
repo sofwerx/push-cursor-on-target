@@ -12,7 +12,6 @@ params = {  # SWX parking lot
     "type": ""
 }
 
-print params
 cot = PushCoT.CursorOnTarget()
 cot_xml = cot.push(params)
 

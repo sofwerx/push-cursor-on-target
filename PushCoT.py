@@ -30,7 +30,7 @@ DIM = {
 
 class CursorOnTarget:
 
-    def push(unit):
+    def push(__self, unit):
         zulu = t.strftime("%Y-%m-%dT%H:%M:%SZ", t.gmtime())
         unit_id = ID[unit["identity"]] or ID["none"]
     
@@ -63,7 +63,7 @@ class CursorOnTarget:
         cot_xml = "<?xml version='1.0' standalone='yes'?'>" + ET.tostring(cot)
         return cot_xml
 
-    def push_to_atak(ip_addr, port, cot_xml):
+    def push_to_atak(__self, ip_addr, port, cot_xml):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sent = sock.sendto(cot_xml, (ip_addr, port))
         print str(sent) + " bytes sent to " + ip_addr + ":" + str(port)
