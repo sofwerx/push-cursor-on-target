@@ -1,6 +1,6 @@
 import PushCoT
 
-ATAK_IP = "192.168.1.150"
+ATAK_IP = "192.168.1.160"
 if "ATAK_IP" in os.environ:
   ATAK_IP = os.environ["ATAK_IP"]
 
