@@ -16,7 +16,7 @@ params = {  # SWX parking lot
     "identity": "friend",
     "dimension": "land-equipment",
     "entity": "military",
-    "type": ""
+#    "type": "E-V-A"
 }
 
 print "Params:\n" + str(params)
