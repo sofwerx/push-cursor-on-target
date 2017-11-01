@@ -1,4 +1,5 @@
 import os
+import time
 import CoT
 
 ATAK_IP = os.getenv('ATAK_IP', '192.168.1.160')
@@ -11,16 +12,22 @@ params = {  # SWX parking lot
     "identity": "hostile",
     "dimension": "land-unit",
     "entity": "military",
-    "type": "U-C-R-H"
+    "type": "U-C"
+#    "type": "U-C-R-H"
 }
 
-print "Params:\n" + str(params)
-cot = CoT.CursorOnTarget()
-cot_xml = cot.atoms(params)
+for i in range(0, 10):
+    params["lat"] = params["lat"] + i/10000.0
+    params["lon"] = params["lon"] + i/10000.0
+    print "Params:\n" + str(params)
+    cot = CoT.CursorOnTarget()
+    cot_xml = cot.atoms(params)
 
-print "\nXML message:"
-print cot_xml
 
-print "\nPushing to ATAK..."
-sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
-print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
+    print "\nXML message:"
+    print cot_xml
+    
+    print "\nPushing to ATAK..."
+    sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
+    print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
+    time.sleep(2)

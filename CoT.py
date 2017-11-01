@@ -39,8 +39,10 @@ class CursorOnTarget:
         timer = dt.datetime
         now = timer.utcnow()
         zulu = now.strftime(DATETIME_FMT)
-
-        stale_now = now.replace(minute=now.minute + 1)
+        stale_part = now.minute + 1
+        if stale_part > 59:
+            stale_part = stale_part - 60
+        stale_now = now.replace(minute=stale_part)
         stale = stale_now.strftime(DATETIME_FMT)
 
         unit_id = ID[unit["identity"]] or ID["none"]
@@ -67,9 +69,9 @@ class CursorOnTarget:
         pt_attr = {
             "lat": str(unit["lat"]),
             "lon":  str(unit["lon"]),
-            "hae": "1",   #unit["hae"],
-            "ce": "50",    #unit["ce"],
-            "le": "50"     #unit["le"]1
+            "hae": "0",   #unit["hae"],
+            "ce": "10",    #unit["ce"],
+            "le": "10"     #unit["le"]1
         }
     
         cot = ET.Element('event', attrib=evt_attr)
