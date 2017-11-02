@@ -4,6 +4,7 @@ import CoT
 
 ATAK_IP = os.getenv('ATAK_IP', '192.168.1.160')
 ATAK_PORT = int(os.getenv('ATAK_PORT', '4242'))
+ATAK_PROTO = os.getenv('ATAK_PROTO', 'UDP')
 
 params = {  # SWX parking lot
     "lat": 27.957261,
@@ -28,6 +29,9 @@ for i in range(0, 10):
     print cot_xml
     
     print "\nPushing to ATAK..."
-    sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
+    if ATAK_PROTO == "TCP":
+      sent = cot.pushTCP(ATAK_IP, ATAK_PORT, cot_xml)
+    else
+      sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
     print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
     time.sleep(2)
