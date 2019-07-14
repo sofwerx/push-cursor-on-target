@@ -31,7 +31,7 @@ for i in range(0, 10):
     print "\nPushing to ATAK..."
     if ATAK_PROTO == "TCP":
       sent = cot.pushTCP(ATAK_IP, ATAK_PORT, cot_xml)
-    else
+    else:
       sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
     print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
     time.sleep(2)
