@@ -60,6 +60,7 @@ class CursorOnTarget:
         evt_attr = {
             "version": "2.0",
             "uid": cot_id,
+            "how": "m-g",
             "time": zulu,
             "start": zulu,
             "stale": stale,
