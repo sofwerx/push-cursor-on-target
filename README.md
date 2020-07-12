@@ -27,11 +27,11 @@ Sample output data:
 <event
 	version="2.0"
 	uid="J-01334"
-    how="m-g"
+	how="m-g"
 	time="2017-10-30T11:43:38.07Z"
 	start="2017-10-30T11:43:38.07Z"
 	stale="2017-10-30T11:55:38.07Z"
-    type="a-h-G">
+	type="a-h-G">
 		<detail></detail>
 		<point
 			lat="30.0090027"
