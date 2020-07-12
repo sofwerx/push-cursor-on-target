@@ -33,9 +33,11 @@ DIM = {
 
 DATETIME_FMT = "%Y-%m-%dT%H:%M:%SZ"
 
+
 class CursorOnTarget:
 
-    def atoms(__self, unit):
+    @staticmethod
+    def atoms(unit):
         timer = dt.datetime
         now = timer.utcnow()
         zulu = now.strftime(DATETIME_FMT)
@@ -74,21 +76,24 @@ class CursorOnTarget:
             "ce": "10",    #unit["ce"],
             "le": "10"     #unit["le"]1
         }
-    
+
         cot = ET.Element('event', attrib=evt_attr)
         ET.SubElement(cot, 'detail')
-        ET.SubElement(cot,'point', attrib=pt_attr)
-    
-        cot_xml = '<?xml version="1.0" standalone="yes"?>' + ET.tostring(cot)
+        ET.SubElement(cot, 'point', attrib=pt_attr)
+
+        cot_xml = '<?xml version="1.0"?>' + ET.tostring(cot, encoding='unicode')
+
         return cot_xml
 
-    def pushUDP(__self, ip_address, port, cot_xml):
+    @staticmethod
+    def pushUDP(ip_address, port, cot_xml):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        sent = sock.sendto(cot_xml, (ip_address, port))
+        sent = sock.sendto(bytes(cot_xml, 'utf-8'), (ip_address, port))
         return sent
 
-    def pushTCP(__self, ip_address, port, cot_xml):
+    @staticmethod
+    def pushTCP(ip_address, port, cot_xml):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         conn = sock.connect((ip_address, port))
-        return sock.send(cot_xml)
+        return sock.send(bytes(cot_xml, 'utf-8'))
 
