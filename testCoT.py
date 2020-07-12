@@ -18,20 +18,19 @@ params = {  # SWX parking lot
 }
 
 for i in range(0, 10):
-    params["lat"] = params["lat"] + i/10000.0
-    params["lon"] = params["lon"] + i/10000.0
-    print "Params:\n" + str(params)
+    #    params["lat"] = params["lat"] + i/10000.0
+    #    params["lon"] = params["lon"] + i/10000.0
+    print("Params:\n" + str(params))
     cot = CoT.CursorOnTarget()
     cot_xml = cot.atoms(params)
 
+    print("\nXML message:")
+    print(cot_xml)
 
-    print "\nXML message:"
-    print cot_xml
-    
-    print "\nPushing to ATAK..."
+    print("\nPushing to ATAK...")
     if ATAK_PROTO == "TCP":
-      sent = cot.pushTCP(ATAK_IP, ATAK_PORT, cot_xml)
-    else
-      sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
-    print str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT)
+        sent = cot.pushTCP(ATAK_IP, ATAK_PORT, cot_xml)
+    else:
+        sent = cot.pushUDP(ATAK_IP, ATAK_PORT, cot_xml)
+    print(str(sent) + " bytes sent to " + ATAK_IP + " on port " + str(ATAK_PORT))
     time.sleep(2)

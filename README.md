@@ -23,14 +23,15 @@ type is MIL-STD-2525 function code in CoT format (single letters separated by hy
 
 Sample output data:
 ```
-<?xml version="1.0" standalone="yes"?>
+<?xml version="1.0"?>
 <event
 	version="2.0"
 	uid="J-01334"
-	type="a-h-G"
+	how="m-g"
 	time="2017-10-30T11:43:38.07Z"
 	start="2017-10-30T11:43:38.07Z"
-	stale="2017-10-30T11:55:38.07Z">
+	stale="2017-10-30T11:55:38.07Z"
+	type="a-h-G">
 		<detail></detail>
 		<point
 			lat="30.0090027"
