@@ -23,7 +23,7 @@ type is MIL-STD-2525 function code in CoT format (single letters separated by hy
 
 Sample output data:
 ```
-<?xml version="1.0" standalone="yes"?>
+<?xml version="1.0"?>
 <event
 	version="2.0"
 	uid="J-01334"
